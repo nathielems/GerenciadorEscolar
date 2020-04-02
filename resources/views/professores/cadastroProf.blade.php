@@ -1,9 +1,9 @@
 @extends('layouts.master')
-@section('title','Gerenciador de Turmas')
+@section('title','Gerenciador Escolar')
 @section('content')
 
 <div class="conteudo">
-    @include('form')
+    @include('professores.formProf')
 </div>
 
 @endsection

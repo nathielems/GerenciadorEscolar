@@ -14,6 +14,7 @@ class CreateAlunosTable extends Migration
     public function up()
     {
         Schema::create('alunos', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->string('nome');
             $table->boolean('sexo');
@@ -22,7 +23,7 @@ class CreateAlunosTable extends Migration
             $table->string('bairro');
             $table->string('rua');
             $table->char('numero');
-            $table->string('complemento');
+            $table->string('complemento')->nullable();
             $table->timestamps();
         });
     }

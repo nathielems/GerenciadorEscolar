@@ -10,11 +10,8 @@
                 <th>Nome</th>
                 <th>Sexo</th>
                 <th>Data de Nascimento</th>
-                <th>Cidade</th>
-                <th>Bairro</th>
-                <th>Rua</th>
-                <th>Número</th>
-                <th>Complemento</th>
+                <th>Telefone</th>
+                <th>  </th>
             </tr>
         </thead>
         <tbody>
@@ -22,24 +19,15 @@
             <tr>
                 <td>{{$cadastro->id}}</td>
                 <td>{{$cadastro->nome}}</td>
-                <td>{{$cadastro->sexo}}</td>
+                <td>{{$cadastro->sexo == 1 ? 'Masculino' :  $cadastro->sexo == 2 ? 'Feminino' : 'Outro' }}</td>
                 <td>{{$cadastro->data_nascimento}}</td>
-                <td>{{$cadastro->cidade}}</td>
-                <td>{{$cadastro->bairro}}</td>
-                <td>{{$cadastro->rua}}</td>
-                <td>{{$cadastro->numero}}</td>
-                <td>{{$cadastro->complemento}}</td>
-            
-                <a href="{{ route('aluno.edit',$aluno->id)}}" class="btn btn-primary">Editar</a>
+                <td>{{$cadastro->telefone}}</td>
+                <td>
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <button class="btn btn-primary" onclick="window.location='{{ route('editarAluno', $cadastro->id)}}'">Editar</button>
+                        <button class="btn btn-danger"  onclick="window.location='{{ route('deletarAluno', $cadastro->id)}}'">Deletar</button>
+                    </div>
                 </td>
-                 <td>
-                {{-- <form action="{{ route('contacts.destroy', $aluno->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Excluir</button>
-                </form> --}}
-            </td>
-
             </tr>
             @endforeach
         </tbody>

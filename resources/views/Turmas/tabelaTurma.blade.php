@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title','Gerenciador Escolar - lista de turmas')
 @section('content')
+@include('mensagens')
 
 <div class="container-fluid no-padding table-responsive-sm">
     <table class="table table-striped nowrap" style="width:100%" id="exemplo">
@@ -10,6 +11,7 @@
                 <th>Descrição</th>
                 <th>Quantidade de Vagas</th>
                 <th>Nome do professor</th>
+                <th>  </th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +21,12 @@
                 <td>{{$cadastroTurma->descricao}}</td>
                 <td>{{$cadastroTurma->quantidade_vagas}}</td>
                 <td>{{$cadastroTurma->nome_professor}}</td>
+                <td>
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        <button class="btn btn-primary" onclick="window.location='{{ route('editarTurma', $cadastroTurma->id)}}'">Editar</button>
+                        <button class="btn btn-danger"  onclick="window.location='{{ route('deletarTurma', $cadastroTurma->id)}}'">Deletar</button>
+                    </div>
+                </tr>
             </tr>
             @endforeach
         </tbody>

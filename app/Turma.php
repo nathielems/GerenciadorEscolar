@@ -3,15 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Turma extends Model
+class Turma extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     protected $fillable = [
-        'descricao', 'quantidade_vagas', 'nome_professor'
+        'descricao', 'quantidade_vagas'
     ];
 
-    public function alunoTurma()
+    public function alunos()
     {
-        return $this->hasMany('App\Aluno_turma');
+        return $this->belongsToMany('App\Aluno', 'aluno_turmas');
+    }
+    
+    public function professor(){
+        return $this->belongsTo('App\Professor'); 
     }
 }

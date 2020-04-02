@@ -4,7 +4,7 @@
 <head>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta charset="utf-8">
-    <title>PDF EXEMPLO</title>
+    <title>PDF Professores</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"
         rel="stylesheet" />
 </head>
@@ -39,25 +39,27 @@
                 <th>Nome</th>
                 <th>Sexo</th>
                 <th>Data de Nascimento</th>
+                <th>E-mail</th>
                 <th>Cidade</th>
-                <th>Bairro</th>
+               {{--  <th>Bairro</th>
                 <th>Rua</th>
                 <th>Número</th>
-                <th>Complemento</th>
+                <th>Complemento</th> --}}
             </tr>
         </thead>
         <tbody>
-            @foreach ($cadastros as $cadastro)
+            @foreach ($cadastrosProf as $cadastroProf)
             <tr>
-                <td>{{$cadastro->id}}</td>
-                <td>{{$cadastro->nome}}</td>
-                <td>{{$cadastro->sexo}}</td>
-                <td>{{$cadastro->data_nascimento}}</td>
-                <td>{{$cadastro->cidade}}</td>
-                <td>{{$cadastro->bairro}}</td>
-                <td>{{$cadastro->rua}}</td>
-                <td>{{$cadastro->numero}}</td>
-                <td>{{$cadastro->complemento}}</td>
+                <td>{{$cadastroProf->id}}</td>
+                <td>{{$cadastroProf->nome}}</td>
+                <td>{{$cadastroProf->sexo == 1 ? 'Masculino' :  $cadastroProf->sexo == 2 ? 'Feminino' : 'Outro' }}</td>
+                <td>{{$cadastroProf->data_nascimento}}</td>
+                <td>{{$cadastroProf->email}}</td>
+                <td>{{$cadastroProf->cidade}}</td>
+                {{-- <td>{{$cadastroProf->bairro}}</td>
+                <td>{{$cadastroProf->rua}}</td>
+                <td>{{$cadastroProf->numero}}</td>
+                <td>{{$cadastroProf->complemento}}</td> --}}
             </tr>
             @endforeach
         </tbody>

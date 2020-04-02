@@ -32,7 +32,7 @@
             </div>
 
             <div class="span">
-                <span>NOME PROJETO</span>
+                <span>Gerenciador Escolar</span>
             </div>
 
         </nav>

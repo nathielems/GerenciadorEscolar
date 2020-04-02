@@ -14,10 +14,10 @@ class CreateTurmasTable extends Migration
     public function up()
     {
         Schema::create('turmas', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->text('descricao');
             $table->char('quantidade_vagas');
-            $table->string('nome_professor');
             $table->timestamps();
         });
     }

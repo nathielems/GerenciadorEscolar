@@ -36,18 +36,18 @@
         <thead align="center">
             <tr>
                 <th>ID</th>
-                <th>Nome</th>
-                <th>Sobrenome</th>
-                <th>Idade</th>
+                <th>Nome do aluno</th>
+                <th>Descrição da turma</th>
+                <th>Nome do(a) Professor(a)</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($cadastrosTurma as $cadastroTurma)
+            @foreach ($alunosTurma as $alunoTurma)
             <tr>
-                <td>{{$cadastroTurma->id}}</td>
-                <td>{{$cadastroTurma->name}}</td>
-                <td>{{$cadastroTurma->surname}}</td>
-                <td>{{$cadastroTurma->age}}</td>
+                <td>{{$alunoTurma->aluno->id}}</td>
+                <td>{{$alunoTurma->aluno->nome}}</td>
+                <td>{{$alunoTurma->turma->descricao}}</td>
+                <td>{{$alunoTurma->turma->professor->nome}}</td>
             </tr>
             @endforeach
         </tbody>

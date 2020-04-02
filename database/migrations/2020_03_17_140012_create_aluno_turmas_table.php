@@ -14,9 +14,10 @@ class CreateAlunoTurmasTable extends Migration
     public function up()
     {
         Schema::create('aluno_turmas', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->bigIncrements('id');
-            $table->unsignedBigIncrements('aluno_id');
-            $table->unsignedBigIncrements('turma_id');
+            $table->unsignedBigInteger('aluno_id');
+            $table->unsignedBigInteger('turma_id');
             $table->timestamps();
 
             $table->foreign('aluno_id')

@@ -3,92 +3,78 @@
 namespace App\Http\Controllers;
 
 use App\Turma;
+use App\Professor;
 use Illuminate\Http\Request;
+use App\Http\Requests\ValidacaoTurma;
 
 class TurmaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $turmas=Turma::all();
-        return view('tabelaTurma',['cadastrosTurma' => $turmas]);
+        return view('Turmas.tabelaTurma',['cadastrosTurma' => $turmas]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  
     public function create()
     {
-        //
+        $professores=Professor::all();
+        return view('Turmas.formTurma',['professores' => $professores]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function store(ValidacaoTurma $request)
     {
-        //dd($request);
+
         $turma= new Turma();
         $turma->descricao = $request->input('descricao');
-        $turma->quantidadeVagas =$request->input('quantidade_vagas');
-        $turma->nomeProfessor =$request->input('nome_professor');
-        $turma->save();
+        $turma->quantidade_vagas =$request->input('quantidade_vagas');
+
+        $professor= Professor::find($request->input('professor'));
+        $turma->professor()->associate($professor)->save();
 
         return redirect()->route('listaTurma');
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $professores=Professor::all();
+        $turma = Turma::find($id);
+        return view('Turmas.editTurma',['turma' => $turma, 'professores' => $professores]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(ValidacaoTurma $request, $id)
     {
-        //
+
+        $turma= Turma::find($id);
+        $turma->descricao = $request->get('descricao');
+        $turma->quantidade_vagas =$request->get('quantidade_vagas');
+        $professor= Professor::find($request->input('professor'));
+        $turma->professor()->associate($professor)->save();
+        $turma->save();
+
+        return redirect()->route('listaTurma')->with('sucesso', 'Turma atualizada!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+
+        try {
+            $turma = Turma::find($id);
+                if(isset($turma)) {
+                    $turma->delete();
+                    return redirect()->route('listaTurma')->with('success','Turma apagada com sucesso!');
+            }
+         } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('listaTurma')->with('danger','Não foi possível apagar a Turma! Há registros dessa Turma');
+         }
+
+    }
+
+    public function pdf(){
+        $cadastrosTurma = Turma::with(['professor'])->get();
+        $pdf = \PDF::loadView('Turmas.pdfTurma', compact('cadastrosTurma'));
+        return $pdf->stream('turma.pdf');
     }
 }
