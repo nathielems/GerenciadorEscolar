@@ -4,7 +4,7 @@
 <head>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta charset="utf-8">
-    <title>PDF EXEMPLO</title>
+    <title>PDF Turma</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css"
         rel="stylesheet" />
 </head>
@@ -37,27 +37,17 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Sexo</th>
-                <th>Data de Nascimento</th>
-                <th>Cidade</th>
-                <th>Bairro</th>
-                <th>Rua</th>
-                <th>Número</th>
-                <th>Complemento</th>
+                <th>Sobrenome</th>
+                <th>Idade</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($cadastros as $cadastro)
+            @foreach ($cadastrosTurma as $cadastroTurma)
             <tr>
-                <td>{{$cadastro->id}}</td>
-                <td>{{$cadastro->nome}}</td>
-                <td>{{$cadastro->sexo}}</td>
-                <td>{{$cadastro->data_nascimento}}</td>
-                <td>{{$cadastro->cidade}}</td>
-                <td>{{$cadastro->bairro}}</td>
-                <td>{{$cadastro->rua}}</td>
-                <td>{{$cadastro->numero}}</td>
-                <td>{{$cadastro->complemento}}</td>
+                <td>{{$cadastroTurma->id}}</td>
+                <td>{{$cadastroTurma->name}}</td>
+                <td>{{$cadastroTurma->surname}}</td>
+                <td>{{$cadastroTurma->age}}</td>
             </tr>
             @endforeach
         </tbody>

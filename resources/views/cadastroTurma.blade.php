@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="conteudo">
-    @include('form')
+    @include('formTurma')
 </div>
 
 @endsection

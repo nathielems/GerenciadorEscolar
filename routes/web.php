@@ -1,50 +1,47 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+use App\Aluno;
+use App\Turma;
+use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\TurmaController;
 use Illuminate\Database\Eloquent\Collection;
+
 Route::get('/', function() {
     return view('welcome');
 });
+
+// ALUNOS 
+
 Route::get('/cadastro', function () {
     return view('cadastro');
 })->name('cadastro');
 
-Route::get('/lista', function() {
-    $collection = collect([
-        ['id' => 1, 'name' => 'John','surname' => 'Constantine', 'age' => 45],
-        ['id' => 2, 'name' => 'Jane', 'surname' => 'Tarzan', 'age' => 33],
-        ['id' => 3, 'name' => 'James', 'surname' => 'Hetfield', 'age' => 56],
-        ['id' => 4, 'name' => 'Pablo', 'surname' => 'Picasso', 'age' => 91],
-        ['id' => 5, 'name' => 'Elton', 'surname' => 'John', 'age' => 72],
-    ]);
-    //dd($collection);
-    $cadastros = json_decode(json_encode($collection));
-    // dd($cadastros);
-    return view('tabela', compact('cadastros'));
-})->name('lista');
+Route::post('/salvar-aluno', 'AlunoController@store')->name('salvarAluno');
 
-Route::get('/pdf',function() {
-    $collection = collect([
-        ['id' => 1, 'name' => 'John','surname' => 'Constantine', 'age' => 45],
-        ['id' => 2, 'name' => 'Jane', 'surname' => 'Tarzan', 'age' => 33],
-        ['id' => 3, 'name' => 'James', 'surname' => 'Hetfield', 'age' => 56],
-        ['id' => 4, 'name' => 'Pablo', 'surname' => 'Picasso', 'age' => 91],
-        ['id' => 5, 'name' => 'Elton', 'surname' => 'John', 'age' => 72],
-    ]);
-    $cadastros = json_decode(json_encode($collection));
+Route::get('/lista', 'AlunoController@index')->name('lista');
+
+Route::get('/pdf-alunos',function() {
+    $cadastros=Aluno::all();
     $pdf = \PDF::loadView('pdf', compact('cadastros'));
     return $pdf->stream('exemplo.pdf');
 })->name('pdf');
+
+//TURMAS
+
+Route::get('/cadastro-turma', function() {
+    return view('cadastroTurma');
+})->name('cadastroTurma');
+
+Route::get('/lista-turma', 'TurmaController@index')->name('listaTurma');
+
+
+Route::get('/pdf-turma',function() {
+    $cadastrosTurma = Turma::all();
+    $pdf = \PDF::loadView('pdfTurma', compact('cadastrosTurma'));
+    return $pdf->stream('exemplo.pdf');
+})->name('pdfTurma');
+
+Route::post('/salvar-turma', 'TurmaController@store')->name('salvarTurma');
 
 Auth::routes();
 

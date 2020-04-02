@@ -4,42 +4,21 @@
 
 <div class="container-fluid no-padding table-responsive-sm">
     <table class="table table-striped nowrap" style="width:100%" id="exemplo">
-        <thead align="left">
+        <thead align="center">
             <tr>
                 <th>ID</th>
-                <th>Nome</th>
-                <th>Sexo</th>
-                <th>Data de Nascimento</th>
-                <th>Cidade</th>
-                <th>Bairro</th>
-                <th>Rua</th>
-                <th>Número</th>
-                <th>Complemento</th>
+                <th>Descrição</th>
+                <th>Quantidade de Vagas</th>
+                <th>Nome do professor</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($cadastros as $cadastro)
+            @foreach ($cadastrosTurma as $cadastroTurma)
             <tr>
-                <td>{{$cadastro->id}}</td>
-                <td>{{$cadastro->nome}}</td>
-                <td>{{$cadastro->sexo}}</td>
-                <td>{{$cadastro->data_nascimento}}</td>
-                <td>{{$cadastro->cidade}}</td>
-                <td>{{$cadastro->bairro}}</td>
-                <td>{{$cadastro->rua}}</td>
-                <td>{{$cadastro->numero}}</td>
-                <td>{{$cadastro->complemento}}</td>
-            
-                <a href="{{ route('aluno.edit',$aluno->id)}}" class="btn btn-primary">Editar</a>
-                </td>
-                 <td>
-                {{-- <form action="{{ route('contacts.destroy', $aluno->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-danger" type="submit">Excluir</button>
-                </form> --}}
-            </td>
-
+                <td>{{$cadastroTurma->id}}</td>
+                <td>{{$cadastroTurma->descricao}}</td>
+                <td>{{$cadastroTurma->quantidade_vagas}}</td>
+                <td>{{$cadastroTurma->nome_professor}}</td>
             </tr>
             @endforeach
         </tbody>

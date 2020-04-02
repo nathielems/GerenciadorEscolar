@@ -29,7 +29,7 @@
                 <li class="nav-item {{ (request()->is('lista')) || (request()->is('cadastro'))  ? 'active' : '' }}">
                     <a data-toggle="collapse" aria-expanded="false" aria-controls="collapseOne" href="#base">
                         <i class="fas fa-users"></i>
-                        <p>Exemplo</p>
+                        <p>Alunos</p>
                         <span class="caret"></span>
                     </a>
                     <div class="expandable collapse {{ (request()->routeIs('cadastro')) || (request()->routeIs('lista')) || (request()->routeIs('pdf')) ? 'show' : '' }}"
@@ -37,17 +37,17 @@
                         <ul class="nav nav-collapse ">
                             <li class="{{ (request()->routeIs('cadastro')) ? 'active' : '' }}">
                                 <a href="{{ route('cadastro') }}">
-                                    <span class="sub-item">Cadastro</span>
+                                    <span class="sub-item">Cadastrar Aluno</span>
                                 </a>
                             </li>
                             <li class="{{ (request()->routeIs('lista')) ? 'active' : '' }}">
                                 <a href="{{ route('lista') }}">
-                                    <span class="sub-item">Lista</span>
+                                    <span class="sub-item">Lista de Alunos</span>
                                 </a>
                             </li>
                             <li class="{{ (request()->routeIs('pdf')) ? 'active' : '' }}">
                                 <a href="{{ route('pdf') }}">
-                                    <span class="sub-item">PDF</span>
+                                    <span class="sub-item">Gerar PDF</span>
                                 </a>
                             </li>
                         </ul>
@@ -55,41 +55,25 @@
                 </li>
                 <li class="nav-item">
                     <a data-toggle="collapse" href="#sidebarLayouts">
-                        <i class="fas fa-sun" style="font-size:20px" actived></i>
-                        <p>Opção 2</p>
+                        <i class="fas fa-align-justify" style="font-size:20px" actived></i>
+                        <p>Turmas</p>
                         <span class="caret"></span>
                     </a>
                     <div class="expandable collapse" id="sidebarLayouts">
                         <ul class="nav nav-collapse">
                             <li class="active'">
-                                <a href="#">
-                                    <span class="sub-item">Página 1</span>
+                                <a href="{{ route('cadastroTurma') }}">
+                                    <span class="sub-item">Cadastrar Turma</span>
                                 </a>
                             </li>
                             <li class="">
-                                <a href="#">
-                                    <span class="sub-item">Página 2</span>
+                                <a href="{{ route('listaTurma') }}">
+                                    <span class="sub-item">Lista de Turmas</span>
                                 </a>
                             </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a data-toggle="collapse" href="#sidebarLayouts2">
-                        <i class="fas fa-bed" actived></i>
-                        <p>Opção 3</p>
-                        <span class="caret"></span>
-                    </a>
-                    <div class="expandable collapse" id="sidebarLayouts2">
-                        <ul class="nav nav-collapse">
-                            <li class="">
-                                <a href="#">
-                                    <span class="sub-item">Página 1</span>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="#">
-                                    <span class="sub-item">Página 2</span>
+                            <li class="{{ (request()->routeIs('pdfTurma')) ? 'active' : '' }}">
+                                <a href="{{ route('pdfTurma') }}">
+                                    <span class="sub-item"> Gerar PDF</span>
                                 </a>
                             </li>
                         </ul>
